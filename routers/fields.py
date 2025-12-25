@@ -44,7 +44,7 @@ def create_field(field_data: FieldCreate, current_user: User = Depends(get_curre
         if planting_date is None:
             planting_date = datetime.now()  # Default to today if not specified
             
-        address = geocoding_service.reverse_geocode_sync(centroid_lat, centroid_lng)
+        address, address_en = geocoding_service.reverse_geocode_sync(centroid_lat, centroid_lng)
         
         db_field = Field(
             name=field_data.name,
@@ -57,7 +57,8 @@ def create_field(field_data: FieldCreate, current_user: User = Depends(get_curre
             area_m2=area_m2,
             centroid_lat=centroid_lat,
             centroid_lng=centroid_lng,
-            address=address
+            address=address,
+            address_en=address_en
         )
         
         db.add(db_field)
@@ -101,6 +102,7 @@ def get_user_fields(current_user: User = Depends(get_current_user), db: Session 
             "centroid_lat": field.centroid_lat,
             "centroid_lng": field.centroid_lng,
             "address": field.address,
+            "address_en": field.address_en,
             "thumbnail": thumbnail_map.get(str(field.id)),
             "created_at": field.created_at,
         }

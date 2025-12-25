@@ -53,6 +53,7 @@ class FieldResponse(FieldBase):
     centroid_lat: float
     centroid_lng: float
     address: Optional[str] = None
+    address_en: Optional[str] = None  # English address
     variety: Optional[str] = None
     planting_season: Optional[str] = None
     thumbnail: Optional[str] = None  # Base64 image data

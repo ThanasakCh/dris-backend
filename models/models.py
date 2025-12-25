@@ -39,6 +39,7 @@ class Field(Base):
     centroid_lat = Column(Float, nullable=False)
     centroid_lng = Column(Float, nullable=False)
     address = Column(Text, nullable=True)
+    address_en = Column(Text, nullable=True)  # English address
     created_at = Column(DateTime, default=datetime.utcnow)
     
     # Relationships
